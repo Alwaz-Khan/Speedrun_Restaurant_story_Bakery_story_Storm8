@@ -1,0 +1,28 @@
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Secrets
+.env
+credentials.json
+.json
+test.py
+
+# Data folders
+data_test/
+data/
+
+# CSV files
+*.csv
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
