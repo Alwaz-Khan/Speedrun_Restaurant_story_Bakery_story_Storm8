@@ -349,7 +349,7 @@
       </div>
 
       <div class="frow">
-        <span class="flabel">Difficulty</span>
+        <span class="flabel">Recipe</span>
         <div class="seg" id="seg-diff">
           <button class="seg-btn"        data-val="easy"   onclick="setDiff('easy')">Easy</button>
           <button class="seg-btn"        data-val="medium" onclick="setDiff('medium')">Medium</button>
@@ -476,7 +476,7 @@
       const legend    = document.getElementById('col-legend');
       const count     = document.getElementById('results-count');
 
-      const valid = rows.filter(r => r.querySelectorAll('td').length >= 7);
+      const valid = rows.filter(r => r.querySelectorAll('td').length >= 9);
 
       if (!valid.length) {
         meta.style.visibility = 'hidden';
@@ -494,14 +494,18 @@
       count.textContent = `${valid.length} cook time${valid.length > 1 ? 's' : ''}`;
 
       container.innerHTML = valid.map((row, i) => {
+        // REPLACE the cell parsing block inside paint() with this:
         const c = row.querySelectorAll('td');
         const time       = c[0].textContent.trim();
         const xpRecipe   = c[1].textContent.trim();
-        const xp         = c[2].textContent.trim();
-        const xpRate     = c[3].textContent.trim();
-        const gpRecipe   = c[4].textContent.trim();
-        const gp         = c[5].textContent.trim();
-        const gpRate     = c[6].textContent.trim();
+        const xpAppl     = c[2].textContent.trim();   // NEW
+        const xp         = c[3].textContent.trim();
+        const xpRate     = c[4].textContent.trim();
+        const gpRecipe   = c[5].textContent.trim();
+        const gpAppl     = c[6].textContent.trim();   // NEW
+        const gp         = c[7].textContent.trim();
+        const gpRate     = c[8].textContent.trim();
+        
 
         return `
         <div class="rrow" style="animation-delay:${i * .035}s">
@@ -515,6 +519,7 @@
             <div class="rcell">
               <span class="rcell-tag xp">⭐ XP</span>
               <div class="rcell-name" title="${xpRecipe}">${xpRecipe}</div>
+              <div style="font-size:10px;font-weight:700;color:var(--muted);margin-top:1px;">🍳 ${xpAppl}</div>
               <div class="rcell-stats">
                 <span class="stat-val xp">${xp}</span>
                 <span class="stat-rate">↗ ${xpRate}/hr</span>
@@ -524,6 +529,7 @@
             <div class="rcell">
               <span class="rcell-tag gp">💰 Profit</span>
               <div class="rcell-name" title="${gpRecipe}">${gpRecipe}</div>
+              <div style="font-size:10px;font-weight:700;color:var(--muted);margin-top:1px;">🍳 ${gpAppl}</div>
               <div class="rcell-stats">
                 <span class="stat-val gp">${gp}</span>
                 <span class="stat-rate">↗ ${gpRate}/hr</span>
