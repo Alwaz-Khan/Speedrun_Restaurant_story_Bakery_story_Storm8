@@ -265,7 +265,7 @@
 
     /* recipe cell */
     .rcell {
-      padding: 9px 10px 9px 10px;
+      padding: 12px 12px 12px 12px;
       border-left: 1px solid var(--border);
       display: flex; flex-direction: column; justify-content: center;
       gap: 3px;
@@ -284,26 +284,26 @@
     .rcell-tag.gp  { background: var(--tag-gp);  color: var(--gp); }
 
     .rcell-name {
-      font-size: 13px; font-weight: 800; color: var(--ink);
+      font-size: 15px; font-weight: 800; color: var(--ink);
       line-height: 1.25;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      white-space: normal; overflow: hidden; text-overflow: ellipsis;
     }
 
     .rcell-stats {
-      display: flex; align-items: center; gap: 5px; flex-wrap: wrap;
+      display: flex; align-items: center; gap: 5px; flex-wrap: nowrap;
       margin-top: 1px;
     }
     .stat-val {
       font-family: 'Fredoka One', cursive;
-      font-size: 13px;
+      font-size: 14px;
     }
     .stat-val.xp { color: var(--xp); }
     .stat-val.gp { color: var(--gp); }
 
     .stat-rate {
-      font-size: 10px; font-weight: 700; color: var(--muted);
+      font-size: 12px; font-weight: 700; color: var(--muted);
       background: var(--border); border-radius: 50px;
-      padding: 1px 6px; white-space: nowrap;
+      padding: 2px 8px; white-space: nowrap;
     }
 
     /* ─────────────────────────────────────────
@@ -328,6 +328,42 @@
       .rcell-name { font-size: 12px; }
       .flabel { min-width: 60px; }
     }
+    
+    @media (max-width: 560px) {
+
+    /* stack XP and Profit cards vertically */
+    .rrow-inner {
+      grid-template-columns: 1fr;
+    }
+
+    /* time cell becomes a full-width header bar */
+    .rcell-time {
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 0;
+    }
+    .time-icon { margin-bottom: 0; }
+    .time-value { font-size: 1rem; }
+
+    /* remove left border on stacked cells */
+    .rcell {
+      border-left: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* hide sticky column legend on mobile since cards are stacked */
+    .col-legend { display: none; }
+
+  }
+
+  .mobile-only { display: none; }
+
+  @media (max-width: 560px) {
+    .mobile-only { display: inline-flex; }
+  }
+  
   </style>
 </head>
 <body>
@@ -525,14 +561,16 @@
             </div>
 
             <div class="rcell">
-              <!-- <span class="rcell-tag xp">⭐ XP</span> -->
               <div style="display:flex;align-items:center;gap:8px;">
                 <img src="${xpImg}" alt="${xpRecipe}" 
-                  style="width:52px;height:52px;object-fit:contain;border-radius:8px;flex-shrink:0;"
+                  style="width:80px;height:80px;object-fit:contain;border-radius:8px;flex-shrink:0;"
                   onerror="this.style.display='none'">
                 <div>
                   <div class="rcell-name" title="${xpRecipe}">${xpRecipe}</div>
-                  <div style="font-size:10px;font-weight:700;color:var(--muted);margin-top:1px;">🍳 ${xpAppl}</div>
+                  <div style="display:flex;align-items:center;gap:5px;margin-top:2px;flex-wrap:wrap;">
+                    <span class="rcell-tag xp mobile-only">⭐ XP</span>
+                    <span style="font-size:12px;font-weight:800;color:var(--ink2);">🍳 ${xpAppl}</span>
+                  </div>
                   <div class="rcell-stats">
                     <span class="stat-val xp">⭐${xp}</span>
                     <span class="stat-rate xp" style="background:var(--tag-xp);color:var(--xp);">${xpRate}/hr</span>
@@ -542,14 +580,16 @@
             </div>
 
             <div class="rcell">
-              <!-- <span class="rcell-tag gp">💰 Profit</span> -->
               <div style="display:flex;align-items:center;gap:8px;">
                 <img src="${gpImg}" alt="${gpRecipe}" 
-                  style="width:52px;height:52px;object-fit:contain;border-radius:8px;flex-shrink:0;"
+                  style="width:80px;height:80px;object-fit:contain;border-radius:8px;flex-shrink:0;"
                   onerror="this.style.display='none'">
                 <div>
                   <div class="rcell-name" title="${gpRecipe}">${gpRecipe}</div>
-                  <div style="font-size:10px;font-weight:700;color:var(--muted);margin-top:1px;">🍳 ${gpAppl}</div>
+                  <div style="display:flex;align-items:center;gap:5px;margin-top:2px;flex-wrap:wrap;">
+                    <span class="rcell-tag gp mobile-only">💰 Profit</span>
+                    <span style="font-size:12px;font-weight:800;color:var(--ink2);">🍳 ${gpAppl}</span>
+                  </div>
                   <div class="rcell-stats">
                     <span class="stat-val gp">💰${gp}</span>
                     <span class="stat-rate gp" style="background:var(--tag-gp);color:var(--gp);">${gpRate}/hr</span>

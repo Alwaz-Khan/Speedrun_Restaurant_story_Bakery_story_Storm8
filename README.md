@@ -56,3 +56,4 @@ All credit for raw data goes to the original source.
 4. postgresql takes the 4 files separately and the google sheet script first combines all the 4 scripts into 1 master and then upload it, can separate the combined file from google sheet script and use the same to upload to postgresql, but that would merge the 2 separate sources of truth that is maintained currently.
 5. this software requires the person to create a google sheet api key and credentials, can direclty prepare an output excel before sending the data to postgresql and google sheet to be published there. 
 6. The github website: make the top bar scalable and use it for self advertisement, the make the cards auto fit the width, try to put picture of recipe for more clarity along with the names
+7. You kneaded me recipe in bakery story has wrond xp mentioned. Correct value is 59, wrongly mentioned 595.
